@@ -1,0 +1,18 @@
+debug: false
+swagger:
+  production: false
+
+server:
+  port: 8088
+  tomcat:
+    uri-encoding: UTF-8
+  servlet:
+    context-path: /socket
+
+#jdbc:
+#  type: mysql
+#  driver: com.mysql.jdbc.Driver
+#  url: jdbc:mysql://localhost:3306/oil?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull
+#  username: root
+#  password: root
+#  testSql: SELECT 1
