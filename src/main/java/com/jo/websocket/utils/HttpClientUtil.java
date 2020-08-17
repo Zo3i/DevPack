@@ -79,9 +79,9 @@ public class HttpClientUtil {
 	public JSONObject getCode ()  {
 		System.out.println("获取验证码");
 		JSONObject ret = new JSONObject();
-		String getCodeUrl = "https://pin.aliyun.com/get_img?sessionid=k0pWIcNKV19h64BGdmusOEcy87/DNh8MsfDhyOaPFI7hM=&identity=login.dingtalk.com&type=default";
+		String getCodeUrl = "https://tool.ityuan.com/captcha/img?t=1596523552944&height=26&width=90&yHeight=19&xWidth=15&charNum=4&fontSize=18&lineNum=15&lineColor=%23000000&borderColor=%23E0AB48&backgroundColor=%23FFFFFF";
 		System.out.println(getCodeUrl);
-		String location = "C:/1.png";
+		String location = "C:/image.jpg";
 		HttpGet get = new HttpGet(getCodeUrl);
 		get.addHeader(new BasicHeader("Connection", "keep-alive"));
 		get.addHeader(new BasicHeader("Content-Type", "application/json, text/javascript, */*; q=0.01"));
@@ -96,7 +96,7 @@ public class HttpClientUtil {
 
 		// 本地保存
 		try {
-//			saveImage(res.getEntity().getContent(), location);
+			saveImage(res.getEntity().getContent(), location);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -141,7 +141,7 @@ public class HttpClientUtil {
 		} finally {
 			// 去除干扰线
 			ImgUtil.zoomImage("C:/image.jpg", "C:/image.jpg", 750, 300);
-            ImgUtil.cleanLinesInImage(new File(location), "C:/");
+//            ImgUtil.cleanLinesInImage(new File(location), "C:/");
 		}
 
 	}
