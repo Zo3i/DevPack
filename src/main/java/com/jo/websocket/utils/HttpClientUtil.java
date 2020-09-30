@@ -22,6 +22,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.cookie.DefaultCookieSpecProvider;
 import org.apache.http.impl.cookie.RFC6265CookieSpecProvider;
 import org.apache.http.message.BasicHeader;
+import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -34,6 +35,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Component
 public class HttpClientUtil {
@@ -109,6 +112,25 @@ public class HttpClientUtil {
 		}
 		ret.put("code", code);
 		return ret;
+	}
+
+	public String getRes(String url) {
+
+		HttpGet get = new HttpGet(url);
+		try {
+			res = httpClient.execute(get, context);
+			String str = EntityUtils.toString(res.getEntity());
+			Pattern pattern = Pattern.compile("#EXTM3U(.*)#EXT-X-ENDLIST");// 匹配的模式
+			Matcher m = pattern.matcher(str);
+			String result = "";
+			while (m.find()) {
+				result += m.group();
+			}
+			return result;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 
